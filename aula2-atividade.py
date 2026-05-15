@@ -1,0 +1,45 @@
+from flask import Flask 
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return '''
+        <!DOCTYPE html>
+        <html lang="pt-BR">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Currículo</title>
+        </head>
+        <body>
+            <h1>Currículo</h1>
+
+            <h3>Profissional dedicado, proativo e comunicativo. Disposto a trabalhar em um ambiente focado e acertativo.</h3>
+
+            <h2>Informações Pessoais</h2>
+            <ul>
+                <li><strong>Nome:</strong> João Otávio</li>  
+                <li><strong>Email:</strong> 12400637@aluno.cotemig.com.br</li>
+                <li><strong>Telefone:</strong> 31 996846278</li>
+            </ul>
+
+            <h2>Experiência Profissional</h2>
+            <ul>
+                <li><strong>Empresa:</strong> Omnitel Consultoria</li>
+                <li><strong>Cargo:</strong> Estagiário de Operações</li>
+                <li><strong>Período:</strong> Ago 2025 - Presente</li>
+            </ul>
+
+            <h2>Línguas</h2>
+            <ul>
+                <li>Português - Nativo</li>
+                <li>Inglês - Intermediário</li>
+            </ul>
+
+        </body>
+        </html>
+    '''
+
+if __name__ == '__main__':
+    app.run(debug=True)
