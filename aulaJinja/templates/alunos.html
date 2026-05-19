@@ -1,0 +1,7 @@
+{% for aluno in alunos %}
+    <p>Nome: {{ aluno.nome }}<br>Situação: {% if aluno.nota >= 7 %}
+        Aprovado
+        {% else %}
+        Reprovado
+        {% endif %}
+{% endfor %}
