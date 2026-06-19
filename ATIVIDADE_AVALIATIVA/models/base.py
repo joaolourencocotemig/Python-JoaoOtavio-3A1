@@ -1,11 +1,17 @@
 from datetime import datetime
 
-from flask_sqlalchemy import SQLAlchemy
-
+# from . import db  →  o ponto significa: "importa o db do __init__.py DESTA pasta"
+# É import relativo (vizinho de quarto). Evita bagunça quando o projeto cresce.
 from . import db
 
 
 class ModeloBase(db.Model):
+    """
+    Superclasse abstrata — não vira tabela no banco.
+    Cliente, Pedido etc. herdam id e datas sem repetir código.
+    """
+
+    # __abstract__ = True  →  "sou molde, não vire tabela modelo_base no SQLite"
     __abstract__ = True
 
     id = db.Column(db.Integer, primary_key=True)
