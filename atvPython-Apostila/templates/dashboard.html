@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block titulo %}Dashboard{% endblock %}
+{% block conteudo %}
+
+<div class="alert alert-info d-flex align-items-center" role="alert">
+    <i class="bi bi-quote fs-4 me-2"></i>
+    <div><em>{{ frase }}</em></div>
+</div>
+
+<div class="row g-4">
+    
+    <div class="col-lg-8">
+        <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+            <h4 class="mb-0"><i class="bi bi-list-task"></i> Minhas Tarefas</h4>
+
+            
+            <div class="dropdown">
+                <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button"
+                        id="dropdownFiltro" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-funnel"></i> <span id="filtroLabel">Todas</span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownFiltro">
+                    <li><a class="dropdown-item filtro-opcao" href="#" data-status="Todas">Todas</a></li>
+                    <li><a class="dropdown-item filtro-opcao" href="#" data-status="Pendente">Pendente</a></li>
+                    <li><a class="dropdown-item filtro-opcao" href="#" data-status="Em andamento">Em andamento</a></li>
+                    <li><a class="dropdown-item filtro-opcao" href="#" data-status="Concluída">Concluída</a></li>
+                </ul>
+            </div>
+
+            <a href="{{ url_for('nova_tarefa') }}" class="btn btn-primary btn-sm">
+                <i class="bi bi-plus-lg"></i> Nova Tarefa
+            </a>
+        </div>
+
+        
+        <div id="listaTarefas" class="row g-3">
+            <div class="text-center text-muted py-4" id="carregando">
+                <div class="spinner-border spinner-border-sm"></div> Carregando tarefas...
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="col-lg-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title"><i class="bi bi-pie-chart"></i> Progresso das Tarefas</h5>
+                <canvas id="graficoProgresso" height="220"></canvas>
+                <hr>
+                <ul class="list-unstyled mb-0 small">
+                    <li><span class="badge" style="background:#ffc107">&nbsp;</span> Pendente: <span id="qtdPendente">0</span></li>
+                    <li><span class="badge" style="background:#0d6efd">&nbsp;</span> Em andamento: <span id="qtdAndamento">0</span></li>
+                    <li><span class="badge" style="background:#198754">&nbsp;</span> Concluída: <span id="qtdConcluida">0</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<template id="templateCardTarefa">
+    <div class="col-md-6 card-tarefa-col">
+        <div class="card h-100 tarefa-card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start">
+                    <h6 class="card-title tarefa-titulo mb-1"></h6>
+                    <span class="badge tarefa-badge"></span>
+                </div>
+                <p class="card-text text-muted small tarefa-descricao"></p>
+                <div class="d-flex gap-2 mt-2">
+                    <a href="#" class="btn btn-sm btn-outline-primary tarefa-editar"><i class="bi bi-pencil"></i></a>
+                    <button type="button" class="btn btn-sm btn-outline-success tarefa-concluir">
+                        <i class="bi bi-check-lg"></i> Concluir
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-danger tarefa-excluir">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}
